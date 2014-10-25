@@ -1,8 +1,10 @@
 package Cherkasov.Artem.algorithm;
 
-public class BinarySearch<E extends Comparable<E>> {
+@SuppressWarnings("unchecked")
+public class BinarySearch {
 	
-	public int binarySearch(E[] orderedArray, E element){
+	@SuppressWarnings("rawtypes")
+	public static int binarySearch(Comparable[] orderedArray, Comparable element){
 		
 		int index_a = 0;
 		int index_b = orderedArray.length;
