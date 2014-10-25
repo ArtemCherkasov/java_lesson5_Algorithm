@@ -8,6 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import Cherkasov.Artem.algorithm.BinarySearch;
 import Cherkasov.Artem.algorithm.CountingSort;
+import Cherkasov.Artem.algorithm.QuickSort;
 import Cherkasov.Artem.algorithm.SelectionSort;
 
 public class TestModule {
@@ -15,6 +16,7 @@ public class TestModule {
 	String[] s;
 	int[] a;
 	Integer[] a_selectionSort;
+	Integer[] a_quickSort;
 	int MIN = 1;
 	int MAX = 20;
 	
@@ -42,16 +44,10 @@ public class TestModule {
 			a[i] = i + 1;
 		}
 		
-		for(int i = 0; i < 200; ++i){
-			int j = new Random().nextInt(MAX);
-			int k = new Random().nextInt(MAX);
-			int buf = a[j];
-			a[j] = a[k];
-			a[k] = buf;
-		}
+		shuffleIntArray(a);
 
 	}
-	
+
 	@Before
 	public void putDataSelectionSort(){
 		a_selectionSort = new Integer[MAX];
@@ -60,13 +56,19 @@ public class TestModule {
 			a_selectionSort[i] = i + 1;
 		}
 		
-		for(int i = 0; i < 200; ++i){
-			int j = new Random().nextInt(MAX);
-			int k = new Random().nextInt(MAX);
-			int buf = a_selectionSort[j];
-			a_selectionSort[j] = a_selectionSort[k];
-			a_selectionSort[k] = buf;
+		shuffleIntArray(a_selectionSort);
+
+	}
+	
+	@Before
+	public void putDataQuickSort(){
+		a_quickSort = new Integer[MAX];
+		
+		for(int i = 0; i < MAX; ++i){
+			a_quickSort[i] = i + 1;
 		}
+		
+		shuffleIntArray(a_quickSort);
 
 	}
 	
@@ -88,6 +90,35 @@ public class TestModule {
 		SelectionSort.selectionSort(a_selectionSort);
 		Integer[] checkArray = new Integer[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
 		assertArrayEquals(checkArray, a_selectionSort);
+	}
+	
+	@Test
+	public void testDataQuickSort(){
+
+		SelectionSort.selectionSort(a_selectionSort);
+		QuickSort.quickSort(a_quickSort, 0, a_quickSort.length - 1);
+		Integer[] checkArray = new Integer[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
+		assertArrayEquals(checkArray, a_quickSort);
+	}
+	
+	private void shuffleIntArray(Integer[] a){
+		for(int i = 0; i < 200; ++i){
+			int j = new Random().nextInt(a.length);
+			int k = new Random().nextInt(a.length);
+			int buf = a_quickSort[j];
+			a_quickSort[j] = a_quickSort[k];
+			a_quickSort[k] = buf;
+		}
+	}
+	
+	private void shuffleIntArray(int[] a){
+		for(int i = 0; i < 200; ++i){
+			int j = new Random().nextInt(a.length);
+			int k = new Random().nextInt(a.length);
+			int buf = a_quickSort[j];
+			a_quickSort[j] = a_quickSort[k];
+			a_quickSort[k] = buf;
+		}
 	}
 	
 }
