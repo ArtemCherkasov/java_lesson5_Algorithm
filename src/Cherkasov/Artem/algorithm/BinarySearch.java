@@ -8,7 +8,7 @@ public class BinarySearch<E extends Comparable<E>> {
 		int index_b = orderedArray.length;
 		int half_a_b = (index_a + index_b)/2;
 		
-		while(index_a < index_b - 1){
+		while(index_a < index_b){
 			if (element.compareTo(orderedArray[half_a_b]) == 0){
 				return half_a_b;
 			} else if (element.compareTo(orderedArray[half_a_b]) > 0){
